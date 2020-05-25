@@ -1,0 +1,116 @@
+﻿<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Touchpad</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="./css/notepad.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+<script src="./js/touchpad.js" type="text/javascript"></script>
+<script>
+
+var textID;
+
+//----------------------------------------------
+function hideClass(c) {
+	
+	x = document.querySelectorAll(c);
+	for (i = 0; i < x.length; i++) {
+		x[i].style.display = "none";
+	}
+}
+
+//----------------------------------------------
+function viewClass(c) {
+	
+	x = document.querySelectorAll(c);
+	for (i = 0; i < x.length; i++) {
+		x[i].style.display = "block";
+	}
+}
+
+//----------------------------------------------
+function init() {
+	// alert('init');
+	/*
+	document.onkeydown = function (e) {
+        return false;
+	}
+	*/
+	textID = document.getElementById('notepad');
+	eraseText();
+	selectLang('English');
+}
+
+//----------------------------------------------
+function copyText() {
+	// alert('copyText');
+   textID.focus();
+   textID.select();
+   document.execCommand("copy");
+}
+
+//----------------------------------------------
+function eraseText() {
+	// alert('eraseText');
+	textID.value= "";
+	textID.focus();
+	resetKB()
+}
+
+//----------------------------------------------
+function selectLang(lang) {
+	// alert('SelectLang: ' + lang);
+	if (lang === "English") {
+		viewClass('.English');
+		hideClass('.Tamil');
+	}
+	else {
+		hideClass('.English');
+		viewClass('.Tamil');
+	}
+	textID.focus();	
+}
+
+</script>
+<style>
+
+</style>
+</head>
+<body onload="init();">
+
+<div class="container">
+	<div class="row">
+		<h3 class="English">Notepad</h3>
+		<h3 class="Tamil">தமிழ் பலகை</h3>
+		<div>
+			<label for="lang">Select Language:</label>
+			<select id="lang" onchange="selectLang(this.value)">
+				<option value='English'>English</option>
+				<option value='Tamil'>தமிழ்</option>
+			</select>	
+			<button class="btn btn-info btn-lg" onclick="copyText();">
+				<span class="English glyphicon glyphicon-copy">Copy</span>
+				<span class="Tamil glyphicon glyphicon-copy">பிரதி </span>
+			</button>
+			<button class="btn btn-info btn-lg" onclick="eraseText();"> 
+				<span class="English glyphicon glyphicon-erase">Erase</span>  
+				<span class="Tamil glyphicon glyphicon-erase">துடை </span>
+			</button>			
+		</div>	
+		<div>
+			<textarea name="notepad" id="notepad" rows=10></textarea>
+		</div>
+		<div class="Tamil" name="keyboard" id="keyboard">
+			<script type="text/javascript">
+				drawKeyboard('notepad');
+			</script>
+		</div>
+	</div>
+</div>
+</body>
+</html>
