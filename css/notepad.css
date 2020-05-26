@@ -1,5 +1,13 @@
-.container {
-	width:600px;
+@media (min-width: 600px) {
+	.container {
+		width: 600px;
+	}
+}
+
+@media (max-width: 600px) {
+	.container {
+		width:100%
+	}
 }
 
 textarea {
@@ -20,7 +28,7 @@ textarea {
 }
 
 .btn-default { 
-    font-size:20px;
+    font-size:16px;
 	background-color:#666666;
 	color:#FFFFFF;
 }

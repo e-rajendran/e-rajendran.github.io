@@ -1,4 +1,13 @@
-
+/*
+======================================================================
+	Site				: http://e-rajendran.githob.io
+	Application Name	: Notepad
+	File Name			: touchpad.js
+	Version (Date)		: 1.0 (January, 2010) 
+	Author				: Raj Elumalai
+	Purpose				: Include file for  Tamil touch keyboard
+=======================================================================
+*/
 var pully = "்"; 
 var akh = "ஃ";
 var vows = ["அ","ஆ","இ","ஈ","உ","ஊ","எ","ஏ","ஐ","ஒ","ஓ","ஔ"]; 
@@ -124,7 +133,7 @@ function mouseDown(key) {
 }
 
 //----------------------------------------------
-function keyClick(id,key) {
+function keyClick(id, key) {
    
  var textarea = textID;
  var currPosn = textID.selectionEnd;
@@ -153,12 +162,12 @@ function getPosition(textarea) {
 }
 
 //----------------------------------------------
-function getPrevChar(txt,posn){
+function getPrevChar(txt, posn){
 	return txt.substring(posn-1,posn);
 }
 
 //----------------------------------------------
-function setPosition(textarea,newPosn) {
+function setPosition(textarea, newPosn) {
 	if( textarea.setSelectionRange ) {
 		textarea.setSelectionRange(newPosn,newPosn);
 	} 

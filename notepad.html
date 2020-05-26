@@ -1,8 +1,19 @@
-﻿<html>
+﻿<!--
+======================================================================
+	Site				: http://e-rajendran.githob.io
+	Application Name	: Notepad
+	File Name			: notepad.html
+	Version (Date)		: 1.0 (January, 2010) 
+	Author				: Raj Elumalai
+	Purpose				: Compose English and Tamil words 
+=======================================================================
+-->
+
+<html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Touchpad</title>
+<title>Notepad</title>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="./css/notepad.css">
@@ -11,9 +22,15 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
 <script src="./js/touchpad.js" type="text/javascript"></script>
+<script src="./js/tanglish.js" type="text/javascript"></script>
 <script>
 
+
 var textID;
+var currPosn;
+var textPartB;
+var textPartE;
+var currLang;
 
 //----------------------------------------------
 function hideClass(c) {
@@ -36,11 +53,6 @@ function viewClass(c) {
 //----------------------------------------------
 function init() {
 	// alert('init');
-	/*
-	document.onkeydown = function (e) {
-        return false;
-	}
-	*/
 	textID = document.getElementById('notepad');
 	eraseText();
 	selectLang('English');
@@ -60,20 +72,85 @@ function eraseText() {
 	textID.value= "";
 	textID.focus();
 	resetKB()
+	document.getElementById("source").value="";
 }
 
 //----------------------------------------------
 function selectLang(lang) {
 	// alert('SelectLang: ' + lang);
-	if (lang === "English") {
+	switch (lang) {
+	case 'English':
 		viewClass('.English');
+		viewClass('.EnglishHelp')
 		hideClass('.Tamil');
-	}
-	else {
-		hideClass('.English');
+		hideClass('.Tanglish');
+		textID.readOnly = false;
+		textID.focus();
+		break;
+		
+	case 'Tamil':
 		viewClass('.Tamil');
+		hideClass('.English');
+		hideClass('.EnglishHelp')
+		hideClass('.Tanglish');
+		textID.readOnly = "true";
+		break;
+		
+	case 'Tanglish':
+		viewClass('.Tanglish');
+		viewClass('.English');
+		hideClass('.EnglishHelp')
+		hideClass('.Tamil')
+		textID.readOnly = "true";	
+		init_tanglish();
+		break;	
+	default:
+		break;
+	}	
+	currLang = lang;
+}
+
+//----------------------------------------------
+function init_tanglish() {
+
+   currPosn = textID.selectionEnd;
+   textPartB = textID.value.substring(0, currPosn);
+   textPartE = textID.value.substring(currPosn);
+   var x = document.getElementById("source");
+   x.value = "";
+   x.focus();
+}
+
+function ta_unicode() {
+
+	str = document.getElementById('source').value;
+	newStr = tamil_unicode_utf8_replace(str);
+	textID.value = textPartB + newStr + textPartE;
+	// newPosn = currPosn + newStr.length;
+	// setPosition(textID,newPosn);
+}
+
+//----------------------------------------------
+function viewHelp() {
+
+    // alert("show_help: " + currLang);
+	switch (currLang) {
+	case 'Tamil':
+		link = "./help/help_kb.html";
+		break;
+		
+	case 'Tanglish':
+		link = "./help/help_uc.html";
+		break;	
+		
+	default:
+		link = "";
+		break;
 	}
-	textID.focus();	
+	if (link != "") {
+		var newWin = window.open(link,"subWindow","status,height=500,width=500");
+		newWin.focus();
+	}
 }
 
 </script>
@@ -82,25 +159,30 @@ function selectLang(lang) {
 </style>
 </head>
 <body onload="init();">
-
 <div class="container">
 	<div class="row">
 		<h3 class="English">Notepad</h3>
 		<h3 class="Tamil">தமிழ் பலகை</h3>
 		<div>
-			<label for="lang">Select Language:</label>
+			<label for="lang">Mode:</label>
 			<select id="lang" onchange="selectLang(this.value)">
 				<option value='English'>English</option>
 				<option value='Tamil'>தமிழ்</option>
+				<option value='Tanglish'>Tanglish</option>
 			</select>	
 			<button class="btn btn-info btn-lg" onclick="copyText();">
 				<span class="English glyphicon glyphicon-copy">Copy</span>
 				<span class="Tamil glyphicon glyphicon-copy">பிரதி </span>
 			</button>
-			<button class="btn btn-info btn-lg" onclick="eraseText();"> 
+			<button class="btn btn-info btn-lg" onclick="eraseText();" > 
 				<span class="English glyphicon glyphicon-erase">Erase</span>  
-				<span class="Tamil glyphicon glyphicon-erase">துடை </span>
+				<span class="Tamil glyphicon glyphicon-erase">துடை</span>
 			</button>			
+			<button class="btn btn-info btn-lg" onclick="viewHelp();">
+				<span class="EnglishHelp glyphicon glyphicon-link">Help</span>  
+				<span class="Tamil glyphicon glyphicon-link">உதவி</span>
+				<span class="Tanglish glyphicon glyphicon-link">Help</span>
+			</button>
 		</div>	
 		<div>
 			<textarea name="notepad" id="notepad" rows=10></textarea>
@@ -109,6 +191,11 @@ function selectLang(lang) {
 			<script type="text/javascript">
 				drawKeyboard('notepad');
 			</script>
+		</div>
+		<div class="Tanglish">
+			<textarea onkeyup=ta_unicode(); name="source" id="source" rows=5 
+					  placeholder="Type in Tanglish. For example, thamiz for தமிழ்">
+			</textarea>
 		</div>
 	</div>
 </div>
