@@ -2,34 +2,54 @@
 	.container {
 		width: 600px;
 	}
+	#keyboard {
+		margin:auto;
+		width:100%;
+		background-color:#666666;
+		text-align:center;
+		padding: 4px 8px 6px;
+		border: 1px solid #9fa3a7;
+	}
+	.btn-default { 
+		font-size:14px;
+		background-color:#666666;
+		color:#FFFFFF;
+	}
+	textarea {
+		width:100%;
+		font-family: latha,"arial unicode ms", Auai_Tamil, sans-serif;
+		font-size: 14px;
+		color:#000000;
+		overflow-y: scroll;
+	}
 }
 
 @media (max-width: 600px) {
 	.container {
 		width:100%
 	}
+	#keyboard {
+		margin:auto;
+		width:100%;
+		background-color:#666666;
+		text-align:center;
+		padding: 2px 4px 3px;
+		border: 1px solid #9fa3a7;
+	}
+	.btn-default { 
+		font-size:12px;
+		background-color:#666666;
+		color:#FFFFFF;
+		padding: 3px 5px 3px;
+	}
+	textarea {
+		width:100%;
+		font-family: latha,"arial unicode ms", Auai_Tamil, sans-serif;
+		font-size: 14px;
+		color:#000000;
+		overflow-y: scroll;
+	}
 }
 
-textarea {
-	width:100%;
-	font-family: latha,"arial unicode ms", Auai_Tamil, sans-serif;
-	font-size: 16px;
-	color:#000000;
-	overflow-y: scroll;
-}
 
-#keyboard {
-	margin:auto;
-	width:100%;
-	background-color:#666666;
-	text-align:center;
-	padding: 4px 8px 6px;
-	border: 1px solid #9fa3a7;
-}
-
-.btn-default { 
-    font-size:16px;
-	background-color:#666666;
-	color:#FFFFFF;
-}
 

@@ -170,22 +170,22 @@ function viewHelp() {
 				<option value='Tamil'>தமிழ்</option>
 				<option value='Tanglish'>Tanglish</option>
 			</select>	
-			<button class="btn btn-info btn-lg" onclick="copyText();">
-				<span class="English glyphicon glyphicon-copy">Copy</span>
-				<span class="Tamil glyphicon glyphicon-copy">பிரதி </span>
+			<button class="btn btn-info" onclick="copyText();">
+				<span class="English">Copy</span>
+				<span class="Tamil">பிரதி </span>
 			</button>
-			<button class="btn btn-info btn-lg" onclick="eraseText();" > 
-				<span class="English glyphicon glyphicon-erase">Erase</span>  
-				<span class="Tamil glyphicon glyphicon-erase">துடை</span>
+			<button class="btn btn-info" onclick="eraseText();" > 
+				<span class="English">Erase</span>  
+				<span class="Tamil">துடை</span>
 			</button>			
-			<button class="btn btn-info btn-lg" onclick="viewHelp();">
-				<span class="EnglishHelp glyphicon glyphicon-link">Help</span>  
-				<span class="Tamil glyphicon glyphicon-link">உதவி</span>
-				<span class="Tanglish glyphicon glyphicon-link">Help</span>
+			<button class="btn btn-info" onclick="viewHelp();">
+				<span class="EnglishHelp">Help</span>  
+				<span class="Tamil">உதவி</span>
+				<span class="Tanglish">Help</span>
 			</button>
 		</div>	
 		<div>
-			<textarea name="notepad" id="notepad" rows=10></textarea>
+			<textarea name="notepad" id="notepad" rows=8></textarea>
 		</div>
 		<div class="Tamil" name="keyboard" id="keyboard">
 			<script type="text/javascript">
@@ -193,7 +193,7 @@ function viewHelp() {
 			</script>
 		</div>
 		<div class="Tanglish">
-			<textarea onkeyup=ta_unicode(); name="source" id="source" rows=5 
+			<textarea onkeyup=ta_unicode(); name="source" id="source" rows=4 
 					  placeholder="Type in Tanglish. For example, thamiz for தமிழ்">
 			</textarea>
 		</div>
